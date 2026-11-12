@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Content Blocker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header with Master Toggle -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="title">YT Blocker</h1>
+          <span class="status-badge" id="statusBadge">Active</span>
+        </div>
+      </div>
+
+      <!-- Master Switch -->
+      <label class="switch" title="Toggle blocking on/off">
+        <input type="checkbox" id="masterToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <!-- Real-time Stats Card -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-number" id="pageBlockedCount">0</span>
+        <span class="stat-label">Hidden on this page</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" id="activeFilterCount">0</span>
+        <span class="stat-label">Active filters</span>
+      </div>
+    </div>
+
+    <!-- Keyword Filter Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Keyword Blocklist</h2>
+        <span class="item-count" id="keywordCount">0 keywords</span>
+      </div>
+      <p class="section-desc">Hides any video whose title contains these words.</p>
+
+      <form id="keywordForm" class="input-group">
+        <input 
+          type="text" 
+          id="keywordInput" 
+          placeholder="e.g. spoiler, prank, clickbait..." 
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button type="submit" id="addKeywordBtn" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+          </svg>
+          Add
+        </button>
+      </form>
+
+      <!-- Keyword Tags / Chips -->
+      <div class="keywords-list" id="keywordsList">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Category Filter Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Category Blocklist</h2>
+      </div>
+      <p class="section-desc">Instantly filter out entire content categories and formats.</p>
+
+      <div class="category-grid">
+        <label class="checkbox-card">
+          <input type="checkbox" id="cat-shorts" data-category="shorts">
+          <span class="checkmark"></span>
+          <span class="card-content">
+            <span class="category-name">Shorts</span>
+            <span class="category-desc">Shelves & short-form videos</span>
+          </span>
+        </label>
+
+        <label class="checkbox-card">
+          <input type="checkbox" id="cat-gaming" data-category="gaming">
+          <span class="checkmark"></span>
+          <span class="card-content">
+            <span class="category-name">Gaming</span>
+            <span class="category-desc">Walkthroughs & esports</span>
+          </span>
+        </label>
+
+        <label class="checkbox-card">
+          <input type="checkbox" id="cat-music" data-category="music">
+          <span class="checkmark"></span>
+          <span class="card-content">
+            <span class="category-name">Music</span>
+            <span class="category-desc">Music videos & VEVO</span>
+          </span>
+        </label>
+
+        <label class="checkbox-card">
+          <input type="checkbox" id="cat-news" data-category="news">
+          <span class="checkmark"></span>
+          <span class="card-content">
+            <span class="category-name">News</span>
+            <span class="category-desc">Breaking news & politics</span>
+          </span>
+        </label>
+
+        <label class="checkbox-card">
+          <input type="checkbox" id="cat-sports" data-category="sports">
+          <span class="checkmark"></span>
+          <span class="card-content">
+            <span class="category-name">Sports</span>
+            <span class="category-desc">Highlights & match replays</span>
+          </span>
+        </label>
+
+        <label class="checkbox-card">
+          <input type="checkbox" id="cat-entertainment" data-category="entertainment">
+          <span class="checkmark"></span>
+          <span class="card-content">
+            <span class="category-name">Entertainment</span>
+            <span class="category-desc">Talk shows & celebrity</span>
+          </span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>Auto-syncs via chrome.storage</span>
+      <button type="button" id="resetBtn" class="link-btn">Reset Defaults</button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
